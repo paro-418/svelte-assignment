@@ -1,12 +1,15 @@
 <script>
   import { cars } from '../store/store.js';
   import { selectedCars } from '../store/store';
+  import { modalStore } from '../store/store.js';
   import Contentareacard from './contentareacard.svelte';
+  import Modal from './modal.svelte';
   let searchedBrand,
     allModels,
     searchedModel = '',
     filteredModels,
-    showModels = [];
+    showModels = [],
+    shoeBrandDetailModal = false;
   cars.subscribe((value) => {
     allModels = value.carmodels;
   });
@@ -24,12 +27,25 @@
     showModels = filteredModels;
   });
 
+  modalStore.subscribe(
+    (value) => (shoeBrandDetailModal = value.showBrandDetailModal)
+  );
+
   function updateModel() {
     showModels = filteredModels.filter((model) =>
       model.Name.toLowerCase()
         .trim()
         .includes(searchedModel.toLowerCase().trim())
     );
+  }
+
+  function openModelModal() {
+    modalStore.update((value) => {
+      return {
+        ...value,
+        showBrandDetailModal: true,
+      };
+    });
   }
 </script>
 
@@ -48,6 +64,12 @@
         {#each showModels as model (model)}
           <Contentareacard {model} />
         {/each}
+        <button
+          on:click={openModelModal}
+          class="border-[1px] border-gray-400 flex justify-center items-center shadow-md hover:shadow-2xl hover:cursor-pointer"
+        >
+          <span class="text-6xl text-gray-700">+</span>
+        </button>
       </div>
     {:else if searchedBrand !== '' && searchedModel.length === 0}
       <div class="font-bold">

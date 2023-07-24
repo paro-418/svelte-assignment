@@ -20,7 +20,6 @@
 
   selectedCars.subscribe((value) => {
     selectedModel = allcars.find((car) => car.Name === value.model);
-    console.log(value);
   });
 </script>
 
