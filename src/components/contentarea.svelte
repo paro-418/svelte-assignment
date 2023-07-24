@@ -33,9 +33,7 @@
   }
 </script>
 
-<div
-  class="basis-3/4  p-4 overflow-y-scroll flex flex-col gap-5"
->
+<div class="basis-3/4 p-4 overflow-y-scroll flex flex-col gap-5">
   <input
     type="text"
     placeholder="search model"
@@ -46,15 +44,18 @@
   />
   <div class="flex justify-center items-center flex-grow">
     {#if searchedBrand !== ''}
-      <div
-        class="card-container flex-grow self-start grid grid-cols-5 gap-8"
-      >
+      <div class="card-container flex-grow self-start grid grid-cols-5 gap-8">
         {#each showModels as model (model)}
           <Contentareacard {model} />
         {/each}
       </div>
+    {:else if searchedBrand !== '' && searchedModel.length === 0}
+      <div class="font-bold">
+        no model found {searchedBrand}
+        {searchedModel.length}
+      </div>
     {:else}
-      <div>select a brand to see information</div>
+      <div class="font-bold">select a brand to see models</div>
     {/if}
   </div>
 </div>

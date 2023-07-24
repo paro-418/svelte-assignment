@@ -22,12 +22,6 @@
     selectedModel = allcars.find((car) => car.Name === value.model);
     console.log(value);
   });
-  // selectedCars.update((value) => {
-  //   return {
-  //     ...value,
-  //     selectedModelInfo: selectedModel,
-  //   };
-  // });
 </script>
 
 <section class="flex flex-col flex-grow overflow-hidden gap-8 p-8 bg-slate-100">
@@ -57,7 +51,7 @@
     />
     <Descriptioncard
       heading="Acceleration"
-      paragraph={`${selectedModel.Acceleration} meter/second<sup>2</sup>`}
+      paragraph={`${selectedModel.Acceleration} meter/second^2`}
     />
     <Descriptioncard heading="Launched" paragraph={`${selectedModel.Year}`} />
     <Descriptioncard heading="Origin" paragraph={`${selectedModel.Origin}`} />
